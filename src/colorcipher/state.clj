@@ -1,6 +1,7 @@
 (ns colorcipher.state)
 
 (defn initial-state
+  "Create an initial state with the given solution"
   [solution]
   {:solution solution
    :attempts []
@@ -11,6 +12,7 @@
    :current-round 1})
 
 (defn update-state
+  "Update the state with the given guess and feedback"
   [state guess feedback]
   (let [{attempts :attempts
          last-feedback :feedback
@@ -23,9 +25,3 @@
            :history (conj history {:attempt guess :feedback feedback})
            :guesses (inc guesses)
            :current-round (inc current-round))))
-
-(def s (initial-state [:red :blue :green :yellow]))
-
-(def u (update-state s [:purple :orange :red :yellow] {:black 1 :white 1}))
-
-u

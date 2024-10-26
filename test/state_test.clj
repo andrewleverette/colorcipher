@@ -10,18 +10,16 @@
               :attempts []
               :feedback []
               :history []
-              :color-set [:red :green :orange :blue :yellow :purple]
               :guesses 0
               :max-guesses 8
               :current-round 1} new-state))))
   (testing "Creating a new state with custom values should return a new state with those values"
     (let [solution [:maroon :navy :olive :lime]
-          new-state (initial-state solution [:maroon :navy :olive :lime :gold :fuchsia] 10)]
+          new-state (initial-state solution 10)]
       (is (= {:solution solution
               :attempts []
               :feedback []
               :history []
-              :color-set [:maroon :navy :olive :lime :gold :fuchsia]
               :guesses 0
               :max-guesses 10
               :current-round 1} new-state)))))

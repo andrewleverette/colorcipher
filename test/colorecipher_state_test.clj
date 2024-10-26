@@ -3,15 +3,28 @@
             [colorcipher.state :refer [initial-state update-state]]))
 
 (deftest test-initial-state
-  (testing "Creating an initial game state creates starting point with the solution"
-    (let [solution [:red :blue :green :yellow]]
+  (testing "Creating an initial default state should return a new state with default values"
+    (let [solution [:red :blue :green :yellow]
+          new-state (initial-state solution)]
       (is (= {:solution solution
               :attempts []
               :feedback []
               :history []
+              :color-set [:red :green :orange :blue :yellow :purple]
               :guesses 0
               :max-guesses 8
-              :current-round 1} (initial-state solution))))))
+              :current-round 1} new-state))))
+  (testing "Creating a new state with custom values should return a new state with those values"
+    (let [solution [:maroon :navy :olive :lime]
+          new-state (initial-state solution [:maroon :navy :olive :lime :gold :fuchsia] 10)]
+      (is (= {:solution solution
+              :attempts []
+              :feedback []
+              :history []
+              :color-set [:maroon :navy :olive :lime :gold :fuchsia]
+              :guesses 0
+              :max-guesses 10
+              :current-round 1} new-state)))))
 
 (deftest test-updating-state
   (testing "Updating the game state adds a new guess and feedback and updates history and guess count numbers"

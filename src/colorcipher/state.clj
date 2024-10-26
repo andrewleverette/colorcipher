@@ -2,14 +2,16 @@
 
 (defn initial-state
   "Create an initial state with the given solution"
-  [solution]
-  {:solution solution
-   :attempts []
-   :feedback []
-   :history []
-   :guesses 0
-   :max-guesses 8
-   :current-round 1})
+  ([solution] (initial-state solution [:red :green :orange :blue :yellow :purple] 8))
+  ([solution color-set max-guesses]
+   {:solution solution
+    :attempts []
+    :feedback []
+    :history []
+    :color-set color-set
+    :guesses 0
+    :max-guesses max-guesses
+    :current-round 1}))
 
 (defn update-state
   "Update the state with the given guess and feedback"

@@ -12,13 +12,20 @@
 
 (defn update-state
   [state guess feedback]
-  (let [new-attempts (conj (:attempts state) guess)
-        new-feedback (conj (:feedback state) feedback)
-        new-history (conj (:history state) {:attempt guess :feedback feedback})]
-    {:solution (:solution state)
-     :attempts new-attempts
-     :feedback new-feedback
-     :history new-history
-     :guesses (inc (:guesses state))
-     :max-guesses (:max-guesses state)
-     :current-round (inc (:current-round state))}))
+  (let [{attempts :attempts
+         last-feedback :feedback
+         history  :history
+         guesses  :guesses
+         current-round :current-round} state]
+    (assoc state
+           :attempts (conj attempts guess)
+           :feedback (conj last-feedback feedback)
+           :history (conj history {:attempt guess :feedback feedback})
+           :guesses (inc guesses)
+           :current-round (inc current-round))))
+
+(def s (initial-state [:red :blue :green :yellow]))
+
+(def u (update-state s [:purple :orange :red :yellow] {:black 1 :white 1}))
+
+u

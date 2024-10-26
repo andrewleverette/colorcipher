@@ -1,4 +1,4 @@
-(ns colorecipher-state-test
+(ns state-test
   (:require [clojure.test :refer [deftest is testing]]
             [colorcipher.state :refer [initial-state update-state]]))
 
